@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+
   def signup
     @user = User.create!(user_params)
     if @user.save

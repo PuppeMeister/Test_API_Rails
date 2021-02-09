@@ -172,7 +172,12 @@ class Api::V1::ProjectsController < ApplicationController
     if deletedData.present?
 
       if deletedData.delete
+
+        #Delete all related content
+        Content.where(projectId: params[:id]).delete_all
+
         render(json: {"message": "Deleted"}, status: :ok)
+
       else
         render(json: deletedData.errors, status: :internal_server_error)
       end
