@@ -44,6 +44,7 @@ rails s
 ```console
 ctrl+c
 ```
+**For testing the thumbnail upload is recommended to use postman form (I attach my postman working plate collection for being a reference).**
 
 ## Unfinished Parts for This API Server?
 **Unit Test with Rspec**:
