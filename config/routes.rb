@@ -27,6 +27,12 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :contents, only: [] do
+        collection do
+          put '/:id', to: 'contents#update'
+        end
+      end
+
       resources :auth, only: [] do
         collection do
           post '/signin' => 'user_token#create'

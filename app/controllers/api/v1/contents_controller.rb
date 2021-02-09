@@ -104,6 +104,39 @@ class Api::V1::ContentsController < ApplicationController
 
   def update
 
+    updatedContent = Content.where(id: params[:id])
+    proID = updatedContent[0]['projectId']
+    projectRef = Project.find_by(proID.to_s)
+
+    if projectRef['userEmail'].eql?(current_user.email)
+
+      modify_params_for_update
+      updatedData = updatedContent.update(contents_params)
+      if updatedData.present?
+        finalMessage =
+          {
+            "data": {
+              "id": updatedData[0]['id'],
+              "type": "content",
+              "attributes": {
+                "projectId": updatedData[0]['projectId'],
+                "projectOwnerName": current_user.firstName+" "+current_user.lastName,
+                "title": updatedData[0]['title'],
+                "body": updatedData[0]['body'],
+                "createdAt": updatedData[0]['created_at'],
+                "updatedAt": updatedData[0]['updated_at']
+              }
+            }
+          }
+        render(json: finalMessage, status: :created)
+      else
+        render(json: "Failed to Update", status: :unprocessable_entity)
+      end
+
+    else
+      render(json: "Restricted Content", status: :unauthorized)
+    end
+
   end
 
   def destroy
@@ -116,8 +149,12 @@ class Api::V1::ContentsController < ApplicationController
   end
 
   def modify_params
-
     params.merge!({:projectId => params[:id]})
     params['content'].merge!({:projectId => params[:id]})
+  end
+
+  def modify_params_for_update
+    params.merge!({:id => params[:id]})
+    params['content'].merge!({:id => params[:id]})
   end
 end

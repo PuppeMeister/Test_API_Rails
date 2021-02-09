@@ -138,7 +138,6 @@ class Api::V1::ProjectsController < ApplicationController
 
     if updatedProject.present?
 
-      #user = User.find_by_email(current_user.email)
       updatedData = Project.find_by_id(params[:id])
 
       finalMessage =
@@ -152,7 +151,6 @@ class Api::V1::ProjectsController < ApplicationController
               "description": updatedData.description,
               "location": updatedData.location,
               "type": updatedData.projectType,
-              #"ownerName": user.firstName+" "+user.lastName,
               "ownerName": current_user.firstName+" "+current_user.lastName,
               "createdAt": updatedData.created_at,
               "updatedAt": updatedData.updated_at
