@@ -51,7 +51,27 @@ class Api::V1::ContentsController < ApplicationController
 
   def show
 
-    render(json: "Yogiyo!!!" , status: :unprocessable_entity)
+    contentData =  Content.where(:projectId => params[:id]).find_by(params[:contentId])
+
+    if contentData.present?
+      user = User.find_by(params[:id])
+      finalData =
+         {
+            "id": contentData.id,
+            "type": "content",
+            "attributes": {
+              "projectId": contentData.projectId,
+              "projectOwnerName": user.firstName+" "+user.lastName,
+              "title": contentData.title,
+              "body": contentData.body,
+              "createdAt": contentData.created_at,
+              "updatedAt": contentData.updated_at
+            }
+         }
+      render(json: {"data": finalData} , status: :created)
+    else
+      render(json: "Requested Content Unavailable." , status: :unprocessable_entity)
+    end
   end
 
   def create
