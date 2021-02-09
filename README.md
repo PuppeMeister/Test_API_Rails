@@ -1,7 +1,7 @@
 # README
 
 # Test API Rails
-Rin Nadia's Test Submission
+Rin Nadia's Test Submission (Receiving invitation time : 2 February 2021, 19.01  || Submitting time : 9 February 2021, 23.12)
 
 ## Additional Installed Gems
 **Knock**:
