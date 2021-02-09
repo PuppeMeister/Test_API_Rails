@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :contents, only: [] do
         collection do
           put '/:id', to: 'contents#update'
+          delete '/:id', to: 'contents#destroy'
         end
       end
 

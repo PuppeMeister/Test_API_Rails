@@ -35,7 +35,7 @@ class Api::V1::ContentsController < ApplicationController
             }
           resultData.push(contentData)
         end
-        render(json: {"data": resultData}, status: :created)
+        render(json: {"data": resultData}, status: :ok)
       else
         render(json: "No Related Content to the Project is unavailable.", status: :unprocessable_entity)
       end
@@ -51,27 +51,28 @@ class Api::V1::ContentsController < ApplicationController
 
   def show
 
-    contentData =  Content.where(:projectId => params[:id]).find_by(params[:contentId])
+    contentData =  Content.where(:projectId=> params[:id], :id=> params[:contentId])
 
     if contentData.present?
       user = User.find_by(params[:id])
       finalData =
-         {
-            "id": contentData.id,
-            "type": "content",
-            "attributes": {
-              "projectId": contentData.projectId,
-              "projectOwnerName": user.firstName+" "+user.lastName,
-              "title": contentData.title,
-              "body": contentData.body,
-              "createdAt": contentData.created_at,
-              "updatedAt": contentData.updated_at
-            }
-         }
-      render(json: {"data": finalData} , status: :created)
+        {
+          "id": contentData[0]["id"],
+          "type": "content",
+          "attributes": {
+            "projectId": contentData[0]['projectId'],
+            "projectOwnerName": user.firstName+" "+user.lastName,
+            "title": contentData[0]['title'],
+            "body": contentData[0]['body'],
+            "createdAt": contentData[0]['created_at'],
+            "updatedAt": contentData[0]['updated_at']
+          }
+        }
+      render(json: {"data": finalData} , status: :ok)
     else
       render(json: "Requested Content Unavailable." , status: :unprocessable_entity)
     end
+
   end
 
   def create
@@ -128,18 +129,40 @@ class Api::V1::ContentsController < ApplicationController
               }
             }
           }
-        render(json: finalMessage, status: :created)
+        render(json: finalMessage, status: :ok)
       else
-        render(json: "Failed to Update", status: :unprocessable_entity)
+        render(json: "Failed to Update.", status: :unprocessable_entity)
       end
 
     else
-      render(json: "Restricted Content", status: :unauthorized)
+      render(json: "Restricted Content.", status: :unauthorized)
     end
 
   end
 
   def destroy
+
+    deletedContent = Content.where(id: params[:id])
+
+    if deletedContent.present?
+      proID = deletedContent[0]['projectId']
+      projectRef = Project.find_by(proID.to_s)
+
+      if projectRef['userEmail'].eql?(current_user.email)
+
+        if deletedContent.delete_all
+          render(json: {"message": "Deleted"}, status: :ok)
+        else
+          render(json: "Failed to Delete.", status: :internal_server_error)
+        end
+
+      else
+        render(json: "Restricted Content.", status: :unauthorized)
+      end
+
+    else
+      render(json: "No Content Found.", status: :unprocessable_entity)
+    end
 
   end
 
@@ -157,4 +180,17 @@ class Api::V1::ContentsController < ApplicationController
     params.merge!({:id => params[:id]})
     params['content'].merge!({:id => params[:id]})
   end
+
+  def check_owner_right
+
+    contentData = Content.where(id: params[:id])
+    proID = contentData[0]['projectId']
+    projectRef = Project.find_by(proID.to_s)
+
+    if projectRef['userEmail'].eql?(current_user.email)
+      return contentData
+    end
+
+  end
+
 end

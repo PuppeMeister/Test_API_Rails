@@ -30,10 +30,10 @@ class Api::V1::ProjectsController < ApplicationController
         final_message.push(projectData)
       end
 
-      render(json: {"data": final_message}, status: :created)
+      render(json: {"data": final_message}, status: :ok)
     else
       #Table is empty
-      render(json: {"message": "Project is empty." }, status: :created)
+      render(json: "Project is empty.", status: :unprocessable_entity)
     end
 
   end
@@ -92,7 +92,7 @@ class Api::V1::ProjectsController < ApplicationController
             }
         }
 
-      render(json: {"data": finalMessage }, status: :created)
+      render(json: {"data": finalMessage }, status: :ok)
     else
       render(json: {"message": project.error }, status: :unprocessable_entity)
     end
@@ -124,9 +124,9 @@ class Api::V1::ProjectsController < ApplicationController
         final_message.push(projectData)
       end
 
-      render(json: {"data": final_message}, status: :created)
+      render(json: {"data": final_message}, status: :ok)
     else
-      render(json: "My project is empty", status: :created)
+      render(json: "My project is empty", status: :unprocessable_entity)
     end
 
   end
@@ -158,7 +158,7 @@ class Api::V1::ProjectsController < ApplicationController
           }
         }
 
-        render(json: finalMessage, status: :created)
+        render(json: finalMessage, status: :ok)
     else
         render(json: "Failed to update", status: :unprocessable_entity)
     end
@@ -172,9 +172,9 @@ class Api::V1::ProjectsController < ApplicationController
     if deletedData.present?
 
       if deletedData.delete
-        render(json: {"message": "Deleted"}, status: :created)
+        render(json: {"message": "Deleted"}, status: :ok)
       else
-        render(json: deletedData.errors, status: :unprocessable_entity)
+        render(json: deletedData.errors, status: :internal_server_error)
       end
     else
       render(json:{"message": "The data does not exist."}, status: :unprocessable_entity)
