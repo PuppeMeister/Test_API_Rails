@@ -18,7 +18,7 @@ Since this is my first using ruby and rails, I uses many sources for learning.
 Mostly, I see Youtube video tutorials, Medium articles, Ruby and Rails documentations 
 and people repository during these 7 days.
 
-## Reasons for mMking Modifications to API Documentation or The Requirements Itself
+## Reasons for Making Modifications to API Documentation or The Requirements Itself
 
 I didn't do many modification toward API documentation explicitly. 
 I've tried my best to follow the spec. 
