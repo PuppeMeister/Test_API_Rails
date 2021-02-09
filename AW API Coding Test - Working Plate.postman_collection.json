@@ -1,0 +1,1576 @@
+{
+	"info": {
+		"_postman_id": "b8fe3c1b-10bd-4bd3-a368-41bcc6cf700a",
+		"name": "AW API Coding Test - Working Plate",
+		"description": "## IMPORTANT\r\nPlease pay attention to the **API Specification** and implement as instructed.\r\n\r\n### Request Structure\r\nThe request payload/body must match as the API Specification.\r\n\r\n### Response Structure\r\n- All the endpoints must return JSON response\r\n- The response examples included in this documentation are for successful requests only.\r\n- For any other requests that fails, **please return appropriate response with appropriate response code.**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Sign-Up - User 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jack\", // Required\r\n    \"lastName\": \"Frost\", // Required\r\n    \"email\": \"frozen@gmail.com\", // Required\r\n    \"password\": \"frozen@123\", // Required\r\n    \"country\": \"North Pole\" // Optional\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/users/signup/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"signup",
+								""
+							]
+						},
+						"description": "Create new user."
+					},
+					"response": [
+						{
+							"name": "Sign-Up Response Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"John\", // Required\r\n    \"lastName\": \"Doe\", // Required\r\n    \"email\": \"john@email.com\", // Required\r\n    \"password\": \"complex_password\", // Required\r\n    \"country\": \"USA\" // Optional\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/users/signup",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"users\",\n        \"attributes\": {\n            \"token\": \"asdf.qwer.zxcv (JWT)\",\n            \"email\": \"john@email.com\",\n            \"name\": \"John Doe\",\n            \"country\": \"USA\",\n            \"createdAt\": \"2020-06-11T11:34+01:00\",\n            \"updatedAt\": \"2020-06-11T11:34+01:00\"\n        }\n    }\n}\n"
+						},
+						{
+							"name": "Sign-Up Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Mark\", // Required\r\n    \"lastName\": \"Doe\", // Required\r\n    \"email\": \"not_an_email.com\", // Required\r\n    \"password\": \"password\", // Required\r\n    \"country\": \"\" // Optional\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/users/signup",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"code": 422,
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Sign-Up - User 1- contoh negative case",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    //\"firstName\": \"Jack\", // Required\r\n    //\"lastName\": \"Frost\", // Required\r\n    //\"email\": \"frozen@gmail.com\", // Required\r\n    \"password\": \"frozen@123\", // Required\r\n    \"country\": \"North Pole\" // Optional\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/v1/users/signup/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"signup",
+										""
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "226fd5e3-946e-4c02-8d76-ce3464e8568b"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.032558"
+								},
+								{
+									"key": "Content-Length",
+									"value": "13383"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 422,\n    \"error\": \"Unprocessable Entity\",\n    \"exception\": \"#<ActiveRecord::RecordInvalid: Validation failed: Password can't be blank, Email can't be blank, Firstname can't be blank, Lastname can't be blank>\",\n    \"traces\": {\n        \"Application Trace\": [\n            {\n                \"id\": 14,\n                \"trace\": \"app/controllers/api/v1/users_controller.rb:4:in `signup'\"\n            }\n        ],\n        \"Framework Trace\": [\n            {\n                \"id\": 0,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/validations.rb:80:in `raise_validation_error'\"\n            },\n            {\n                \"id\": 1,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/validations.rb:52:in `save!'\"\n            },\n            {\n                \"id\": 2,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:315:in `block in save!'\"\n            },\n            {\n                \"id\": 3,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:387:in `block in with_transaction_returning_status'\"\n            },\n            {\n                \"id\": 4,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `block in transaction'\"\n            },\n            {\n                \"id\": 5,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/connection_adapters/abstract/transaction.rb:239:in `block in within_new_transaction'\"\n            },\n            {\n                \"id\": 6,\n                \"trace\": \"/home/seslab/.rvm/rubies/ruby-2.5.1/lib/ruby/2.5.0/monitor.rb:226:in `mon_synchronize'\"\n            },\n            {\n                \"id\": 7,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/connection_adapters/abstract/transaction.rb:236:in `within_new_transaction'\"\n            },\n            {\n                \"id\": 8,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `transaction'\"\n            },\n            {\n                \"id\": 9,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:212:in `transaction'\"\n            },\n            {\n                \"id\": 10,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:385:in `with_transaction_returning_status'\"\n            },\n            {\n                \"id\": 11,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:315:in `save!'\"\n            },\n            {\n                \"id\": 12,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/suppressor.rb:48:in `save!'\"\n            },\n            {\n                \"id\": 13,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/persistence.rb:53:in `create!'\"\n            },\n            {\n                \"id\": 15,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'\"\n            },\n            {\n                \"id\": 16,\n                \"trace\": \"actionpack (5.2.4.4) lib/abstract_controller/base.rb:194:in `process_action'\"\n            },\n            {\n                \"id\": 17,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/rendering.rb:30:in `process_action'\"\n            },\n            {\n                \"id\": 18,\n                \"trace\": \"actionpack (5.2.4.4) lib/abstract_controller/callbacks.rb:42:in `block in process_action'\"\n            },\n            {\n                \"id\": 19,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/callbacks.rb:132:in `run_callbacks'\"\n            },\n            {\n                \"id\": 20,\n                \"trace\": \"actionpack (5.2.4.4) lib/abstract_controller/callbacks.rb:41:in `process_action'\"\n            },\n            {\n                \"id\": 21,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/rescue.rb:22:in `process_action'\"\n            },\n            {\n                \"id\": 22,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'\"\n            },\n            {\n                \"id\": 23,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/notifications.rb:168:in `block in instrument'\"\n            },\n            {\n                \"id\": 24,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/notifications/instrumenter.rb:23:in `instrument'\"\n            },\n            {\n                \"id\": 25,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/notifications.rb:168:in `instrument'\"\n            },\n            {\n                \"id\": 26,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/instrumentation.rb:32:in `process_action'\"\n            },\n            {\n                \"id\": 27,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'\"\n            },\n            {\n                \"id\": 28,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/railties/controller_runtime.rb:24:in `process_action'\"\n            },\n            {\n                \"id\": 29,\n                \"trace\": \"actionpack (5.2.4.4) lib/abstract_controller/base.rb:134:in `process'\"\n            },\n            {\n                \"id\": 30,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal.rb:191:in `dispatch'\"\n            },\n            {\n                \"id\": 31,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal.rb:252:in `dispatch'\"\n            },\n            {\n                \"id\": 32,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'\"\n            },\n            {\n                \"id\": 33,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/routing/route_set.rb:34:in `serve'\"\n            },\n            {\n                \"id\": 34,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/journey/router.rb:52:in `block in serve'\"\n            },\n            {\n                \"id\": 35,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/journey/router.rb:35:in `each'\"\n            },\n            {\n                \"id\": 36,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/journey/router.rb:35:in `serve'\"\n            },\n            {\n                \"id\": 37,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/routing/route_set.rb:840:in `call'\"\n            },\n            {\n                \"id\": 38,\n                \"trace\": \"rack (2.2.3) lib/rack/etag.rb:27:in `call'\"\n            },\n            {\n                \"id\": 39,\n                \"trace\": \"rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'\"\n            },\n            {\n                \"id\": 40,\n                \"trace\": \"rack (2.2.3) lib/rack/head.rb:12:in `call'\"\n            },\n            {\n                \"id\": 41,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/migration.rb:559:in `call'\"\n            },\n            {\n                \"id\": 42,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'\"\n            },\n            {\n                \"id\": 43,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/callbacks.rb:98:in `run_callbacks'\"\n            },\n            {\n                \"id\": 44,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/callbacks.rb:26:in `call'\"\n            },\n            {\n                \"id\": 45,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'\"\n            },\n            {\n                \"id\": 46,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'\"\n            },\n            {\n                \"id\": 47,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'\"\n            },\n            {\n                \"id\": 48,\n                \"trace\": \"railties (5.2.4.4) lib/rails/rack/logger.rb:38:in `call_app'\"\n            },\n            {\n                \"id\": 49,\n                \"trace\": \"railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `block in call'\"\n            },\n            {\n                \"id\": 50,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `block in tagged'\"\n            },\n            {\n                \"id\": 51,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:28:in `tagged'\"\n            },\n            {\n                \"id\": 52,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `tagged'\"\n            },\n            {\n                \"id\": 53,\n                \"trace\": \"railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `call'\"\n            },\n            {\n                \"id\": 54,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'\"\n            },\n            {\n                \"id\": 55,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'\"\n            },\n            {\n                \"id\": 56,\n                \"trace\": \"rack (2.2.3) lib/rack/runtime.rb:22:in `call'\"\n            },\n            {\n                \"id\": 57,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'\"\n            },\n            {\n                \"id\": 58,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'\"\n            },\n            {\n                \"id\": 59,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/static.rb:127:in `call'\"\n            },\n            {\n                \"id\": 60,\n                \"trace\": \"rack (2.2.3) lib/rack/sendfile.rb:110:in `call'\"\n            },\n            {\n                \"id\": 61,\n                \"trace\": \"railties (5.2.4.4) lib/rails/engine.rb:524:in `call'\"\n            },\n            {\n                \"id\": 62,\n                \"trace\": \"puma (3.12.6) lib/puma/configuration.rb:227:in `call'\"\n            },\n            {\n                \"id\": 63,\n                \"trace\": \"puma (3.12.6) lib/puma/server.rb:706:in `handle_request'\"\n            },\n            {\n                \"id\": 64,\n                \"trace\": \"puma (3.12.6) lib/puma/server.rb:476:in `process_client'\"\n            },\n            {\n                \"id\": 65,\n                \"trace\": \"puma (3.12.6) lib/puma/server.rb:334:in `block in run'\"\n            },\n            {\n                \"id\": 66,\n                \"trace\": \"puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'\"\n            }\n        ],\n        \"Full Trace\": [\n            {\n                \"id\": 0,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/validations.rb:80:in `raise_validation_error'\"\n            },\n            {\n                \"id\": 1,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/validations.rb:52:in `save!'\"\n            },\n            {\n                \"id\": 2,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:315:in `block in save!'\"\n            },\n            {\n                \"id\": 3,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:387:in `block in with_transaction_returning_status'\"\n            },\n            {\n                \"id\": 4,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `block in transaction'\"\n            },\n            {\n                \"id\": 5,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/connection_adapters/abstract/transaction.rb:239:in `block in within_new_transaction'\"\n            },\n            {\n                \"id\": 6,\n                \"trace\": \"/home/seslab/.rvm/rubies/ruby-2.5.1/lib/ruby/2.5.0/monitor.rb:226:in `mon_synchronize'\"\n            },\n            {\n                \"id\": 7,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/connection_adapters/abstract/transaction.rb:236:in `within_new_transaction'\"\n            },\n            {\n                \"id\": 8,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `transaction'\"\n            },\n            {\n                \"id\": 9,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:212:in `transaction'\"\n            },\n            {\n                \"id\": 10,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:385:in `with_transaction_returning_status'\"\n            },\n            {\n                \"id\": 11,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/transactions.rb:315:in `save!'\"\n            },\n            {\n                \"id\": 12,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/suppressor.rb:48:in `save!'\"\n            },\n            {\n                \"id\": 13,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/persistence.rb:53:in `create!'\"\n            },\n            {\n                \"id\": 14,\n                \"trace\": \"app/controllers/api/v1/users_controller.rb:4:in `signup'\"\n            },\n            {\n                \"id\": 15,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'\"\n            },\n            {\n                \"id\": 16,\n                \"trace\": \"actionpack (5.2.4.4) lib/abstract_controller/base.rb:194:in `process_action'\"\n            },\n            {\n                \"id\": 17,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/rendering.rb:30:in `process_action'\"\n            },\n            {\n                \"id\": 18,\n                \"trace\": \"actionpack (5.2.4.4) lib/abstract_controller/callbacks.rb:42:in `block in process_action'\"\n            },\n            {\n                \"id\": 19,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/callbacks.rb:132:in `run_callbacks'\"\n            },\n            {\n                \"id\": 20,\n                \"trace\": \"actionpack (5.2.4.4) lib/abstract_controller/callbacks.rb:41:in `process_action'\"\n            },\n            {\n                \"id\": 21,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/rescue.rb:22:in `process_action'\"\n            },\n            {\n                \"id\": 22,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'\"\n            },\n            {\n                \"id\": 23,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/notifications.rb:168:in `block in instrument'\"\n            },\n            {\n                \"id\": 24,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/notifications/instrumenter.rb:23:in `instrument'\"\n            },\n            {\n                \"id\": 25,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/notifications.rb:168:in `instrument'\"\n            },\n            {\n                \"id\": 26,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/instrumentation.rb:32:in `process_action'\"\n            },\n            {\n                \"id\": 27,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'\"\n            },\n            {\n                \"id\": 28,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/railties/controller_runtime.rb:24:in `process_action'\"\n            },\n            {\n                \"id\": 29,\n                \"trace\": \"actionpack (5.2.4.4) lib/abstract_controller/base.rb:134:in `process'\"\n            },\n            {\n                \"id\": 30,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal.rb:191:in `dispatch'\"\n            },\n            {\n                \"id\": 31,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_controller/metal.rb:252:in `dispatch'\"\n            },\n            {\n                \"id\": 32,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'\"\n            },\n            {\n                \"id\": 33,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/routing/route_set.rb:34:in `serve'\"\n            },\n            {\n                \"id\": 34,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/journey/router.rb:52:in `block in serve'\"\n            },\n            {\n                \"id\": 35,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/journey/router.rb:35:in `each'\"\n            },\n            {\n                \"id\": 36,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/journey/router.rb:35:in `serve'\"\n            },\n            {\n                \"id\": 37,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/routing/route_set.rb:840:in `call'\"\n            },\n            {\n                \"id\": 38,\n                \"trace\": \"rack (2.2.3) lib/rack/etag.rb:27:in `call'\"\n            },\n            {\n                \"id\": 39,\n                \"trace\": \"rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'\"\n            },\n            {\n                \"id\": 40,\n                \"trace\": \"rack (2.2.3) lib/rack/head.rb:12:in `call'\"\n            },\n            {\n                \"id\": 41,\n                \"trace\": \"activerecord (5.2.4.4) lib/active_record/migration.rb:559:in `call'\"\n            },\n            {\n                \"id\": 42,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'\"\n            },\n            {\n                \"id\": 43,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/callbacks.rb:98:in `run_callbacks'\"\n            },\n            {\n                \"id\": 44,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/callbacks.rb:26:in `call'\"\n            },\n            {\n                \"id\": 45,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'\"\n            },\n            {\n                \"id\": 46,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'\"\n            },\n            {\n                \"id\": 47,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'\"\n            },\n            {\n                \"id\": 48,\n                \"trace\": \"railties (5.2.4.4) lib/rails/rack/logger.rb:38:in `call_app'\"\n            },\n            {\n                \"id\": 49,\n                \"trace\": \"railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `block in call'\"\n            },\n            {\n                \"id\": 50,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `block in tagged'\"\n            },\n            {\n                \"id\": 51,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:28:in `tagged'\"\n            },\n            {\n                \"id\": 52,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/tagged_logging.rb:71:in `tagged'\"\n            },\n            {\n                \"id\": 53,\n                \"trace\": \"railties (5.2.4.4) lib/rails/rack/logger.rb:26:in `call'\"\n            },\n            {\n                \"id\": 54,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'\"\n            },\n            {\n                \"id\": 55,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'\"\n            },\n            {\n                \"id\": 56,\n                \"trace\": \"rack (2.2.3) lib/rack/runtime.rb:22:in `call'\"\n            },\n            {\n                \"id\": 57,\n                \"trace\": \"activesupport (5.2.4.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'\"\n            },\n            {\n                \"id\": 58,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/executor.rb:14:in `call'\"\n            },\n            {\n                \"id\": 59,\n                \"trace\": \"actionpack (5.2.4.4) lib/action_dispatch/middleware/static.rb:127:in `call'\"\n            },\n            {\n                \"id\": 60,\n                \"trace\": \"rack (2.2.3) lib/rack/sendfile.rb:110:in `call'\"\n            },\n            {\n                \"id\": 61,\n                \"trace\": \"railties (5.2.4.4) lib/rails/engine.rb:524:in `call'\"\n            },\n            {\n                \"id\": 62,\n                \"trace\": \"puma (3.12.6) lib/puma/configuration.rb:227:in `call'\"\n            },\n            {\n                \"id\": 63,\n                \"trace\": \"puma (3.12.6) lib/puma/server.rb:706:in `handle_request'\"\n            },\n            {\n                \"id\": 64,\n                \"trace\": \"puma (3.12.6) lib/puma/server.rb:476:in `process_client'\"\n            },\n            {\n                \"id\": 65,\n                \"trace\": \"puma (3.12.6) lib/puma/server.rb:334:in `block in run'\"\n            },\n            {\n                \"id\": 66,\n                \"trace\": \"puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign-In - User 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"email\": \"frozen@gmail.com\", // Required\r\n        \"password\": \"frozen123\" // Required\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signin"
+							]
+						},
+						"description": "API Endpoint to authenticate and obtain authentication token."
+					},
+					"response": [
+						{
+							"name": "Sign-In",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"auth\": {\r\n        \"email\": \"bbb@gmail.com\", // Required\r\n        \"password\": \"testabicde\" // Required\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/v1/auth/signin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8a448d52dd3ef13aa833a4c0fdaed2b6\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "de751d16-3bdc-4355-92ed-96bea4e3a56b"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.189923"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"users\",\n        \"attributes\": {\n            \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI3OTk5NzksInN1YiI6MX0.mhKgT1c14N6QeEFfTci7DjuSMObowPD_4_j8Y1n0jRc\",\n            \"email\": \"bbb@gmail.com\",\n            \"name\": \"my name\",\n            \"country\": \"\",\n            \"createdAt\": \"2021-02-07T04:14:48.668Z\",\n            \"updatedAt\": \"2021-02-07T04:14:48.668Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Sign-In Request-Response Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"auth\": {\r\n        \"email\": \"john@email.com\", // Email, Required\r\n        \"password\": \"complex_password\" // String, Required\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/auth/signin",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n  \"data\": {\n    \"id\": 1,\n    \"type\": \"users\",\n    \"attributes\": {\n      \"token\": \"asdf.qwer.zxcv (JWT)\",\n      \"email\": \"john@email.com\",\n      \"name\": \"John Doe\",\n      \"country\": \"USA\",\n      \"createdAt\": \"2020-06-11T11:34+01:00\",\n      \"updatedAt\": \"2020-06-11T11:34+01:00\"\n    }\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign-Up - User 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"snow\", // Required\r\n    \"lastName\": \"man\", // Required\r\n    \"email\": \"snowman@gmail.com\", // Required\r\n    \"password\": \"snow123\", // Required\r\n    \"country\": \"iceland\" // Optional\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/users/signup/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"signup",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sign-Up Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Mark\", // Required\r\n    \"lastName\": \"Doe\", // Required\r\n    \"email\": \"not_an_email.com\", // Required\r\n    \"password\": \"password\", // Required\r\n    \"country\": \"\" // Optional\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/users/signup",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"code": 422,
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Sign-Up Response Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"John\", // Required\r\n    \"lastName\": \"Doe\", // Required\r\n    \"email\": \"john@email.com\", // Required\r\n    \"password\": \"complex_password\", // Required\r\n    \"country\": \"USA\" // Optional\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/users/signup",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"users\",\n        \"attributes\": {\n            \"token\": \"asdf.qwer.zxcv (JWT)\",\n            \"email\": \"john@email.com\",\n            \"name\": \"John Doe\",\n            \"country\": \"USA\",\n            \"createdAt\": \"2020-06-11T11:34+01:00\",\n            \"updatedAt\": \"2020-06-11T11:34+01:00\"\n        }\n    }\n}\n"
+						}
+					]
+				},
+				{
+					"name": "Sign-In - User 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"email\": \"snowman@gmail.com\", // Required\r\n        \"password\": \"snow123\" // Required\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signin"
+							]
+						},
+						"description": "API Endpoint to authenticate and obtain authentication token."
+					},
+					"response": [
+						{
+							"name": "Sign-In",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"auth\": {\r\n        \"email\": \"bbb@gmail.com\", // Required\r\n        \"password\": \"testabicde\" // Required\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/v1/auth/signin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8a448d52dd3ef13aa833a4c0fdaed2b6\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "de751d16-3bdc-4355-92ed-96bea4e3a56b"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.189923"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"users\",\n        \"attributes\": {\n            \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI3OTk5NzksInN1YiI6MX0.mhKgT1c14N6QeEFfTci7DjuSMObowPD_4_j8Y1n0jRc\",\n            \"email\": \"bbb@gmail.com\",\n            \"name\": \"my name\",\n            \"country\": \"\",\n            \"createdAt\": \"2021-02-07T04:14:48.668Z\",\n            \"updatedAt\": \"2021-02-07T04:14:48.668Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Sign-In Request-Response Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"auth\": {\r\n        \"email\": \"john@email.com\", // Email, Required\r\n        \"password\": \"complex_password\" // String, Required\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/auth/signin",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n  \"data\": {\n    \"id\": 1,\n    \"type\": \"users\",\n    \"attributes\": {\n      \"token\": \"asdf.qwer.zxcv (JWT)\",\n      \"email\": \"john@email.com\",\n      \"name\": \"John Doe\",\n      \"country\": \"USA\",\n      \"createdAt\": \"2020-06-11T11:34+01:00\",\n      \"updatedAt\": \"2020-06-11T11:34+01:00\"\n    }\n  }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Get Project",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Project Response Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects/:id",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Number, <REQUIRED>"
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"type\": \"project\",\r\n        \"attributes\": {\r\n            \"title\": \"Project A\",\r\n            \"thumbnail\": \"http://ondronemap.com/story.jpg\",\r\n            \"description\": \"\",\r\n            \"location\": \"Seoul\",\r\n            \"type\": \"international\",\r\n            \"ownerName\": \"John Doe\",\r\n            \"createdAt\": \"2020-06-11T11:34+01:00\",\r\n            \"updatedAt\": \"2020-06-11T11:34+01:00\"\r\n        }\r\n    }\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all Projects Response Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"type\": \"project\",\r\n            \"attributes\": {\r\n                \"title\": \"Project A\",\r\n                \"thumbnail\": \"http://ondronemap.com/story.jpg\",\r\n                \"description\": \"\",\r\n                \"location\": \"Seoul\",\r\n                \"type\": \"international\",\r\n                \"ownerName\": \"John Doe\",\r\n                \"createdAt\": \"2020-06-11T11:34+01:00\",\r\n                \"updatedAt\": \"2020-06-11T11:34+01:00\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"type\": \"project\",\r\n            \"attributes\": {\r\n                \"title\": \"Project B\",\r\n                \"thumbnail\": \"http://ondronemap.com/story2.jpg\",\r\n                \"description\": \"\",\r\n                \"location\": \"Bushan\",\r\n                \"type\": \"in_house\",\r\n                \"ownerName\": \"Jane Doe\",\r\n                \"createdAt\": \"2020-11-16T11:34+01:00\",\r\n                \"updatedAt\": \"2020-11-16T11:34+01:00\"\r\n            }\r\n        }\r\n    ]\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI4NjA2ODMsInN1YiI6Mn0.22kFRPtn7eUooHQJ-_xw9GwGGSdO4G3qtBnzCNCR_tg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Project Seoul\",\r\n    \"description\": \"Projek bersihin\",\r\n    //\"type\": \"external\", // { in-house: 0, external: 1, international: 2 }\r\n    \"location\": \"Gwanjin-gu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								"1"
+							]
+						},
+						"description": "#### Important Notes:\r\n**For request body:**\r\n- `type`: The datatype of type in DB is integer, but the API accepts and returns string (Please refer to parameter description). *Hint: Enumeration*\r\n- `thumbnail`: Upload image"
+					},
+					"response": [
+						{
+							"name": "Update Project Response Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Project A Updated\",\r\n    \"thumbnail\": \"http://ondronemap.com/story.jpg\",\r\n    \"description\": \"Edited description in.\",\r\n    \"location\": \"Seoul\",\r\n    \"type\": \"international\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects/:id",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"type\": \"project\",\r\n        \"attributes\": {\r\n            \"title\": \"Project A Updated\",\r\n            \"thumbnail\": \"http://ondronemap.com/story.jpg\",\r\n            \"description\": \"Edited description in.\",\r\n            \"location\": \"Seoul\",\r\n            \"type\": \"international\",\r\n            \"ownerName\": \"John Doe\",\r\n            \"createdAt\": \"2020-06-11T11:34+01:00\",\r\n            \"updatedAt\": \"2020-06-11T11:34+01:00\"\r\n        }\r\n    }\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI4NjA2ODMsInN1YiI6Mn0.22kFRPtn7eUooHQJ-_xw9GwGGSdO4G3qtBnzCNCR_tg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Project Response Example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects/:id",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Deleted\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all Owned Projects - user 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI4NDc4NjYsInN1YiI6Mn0.tQ0LvmtKtZQe88JySOqIrsphqPW0lbIANQjFfxF4QF4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects/my_projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								"my_projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all Owned Projects",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects/my_projects",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects",
+										"my_projects"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"type\": \"projects\",\n            \"attributes\": {\n                \"title\": \"Project A\",\n                \"thumbnail\": \"http://ondronemap.com/story.jpg\",\n                \"description\": \"\",\n                \"location\": \"Seoul\",\n                \"type\": \"international\",\n                \"createdAt\": \"2020-06-11T11:34+01:00\",\n                \"updatedAt\": \"2020-06-11T11:34+01:00\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"type\": \"projects\",\n            \"attributes\": {\n                \"title\": \"Project Z\",\n                \"thumbnail\": \"http://ondronemap.com/story26.jpg\",\n                \"description\": \"\",\n                \"location\": \"Incheon\",\n                \"type\": \"external\",\n                \"createdAt\": \"2020-11-16T11:34+01:00\",\n                \"updatedAt\": \"2020-11-16T11:34+01:00\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get all Owned Projects - user 1 - Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/api/v1/projects/my_projects",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"v1",
+										"projects",
+										"my_projects"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/html"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "ba18f853-b9bd-4292-9768-472de8d7eb88"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.028126"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Create Project - User 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI5NjQ3NzUsInN1YiI6Mn0.t7IUGpsPix0QmOvWPS3gH8ngZKD_c7p0Zlb-QaZAmAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Project A",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "A Description",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "in_house",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Seoul",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/home/seslab/Desktop/Dummy Thumbnail/kitten.jpeg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Project Response Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Project A",
+											"description": "String (REQUIRED)",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"description": "Text (OPTIONAL)",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "international",
+											"description": "{ in_house: 0, external: 1, international: 2 } (REQUIRED)",
+											"type": "text"
+										},
+										{
+											"key": "location",
+											"value": "Seoul",
+											"description": "String (REQUIRED)",
+											"type": "text"
+										},
+										{
+											"key": "thumbnail",
+											"description": "Image File (REQUIRED)",
+											"type": "file",
+											"src": "/F:/My Downloads/story.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects"
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"project\",\n        \"attributes\": {\n            \"title\": \"Project A\",\n            \"thumbnail\": \"http://ondronemap.com/story.jpg\",\n            \"description\": \"\",\n            \"location\": \"Seoul\",\n            \"type\": \"international\",\n            \"ownerName\": \"John Doe\",\n            \"createdAt\": \"2020-06-11T11:34+01:00\",\n            \"updatedAt\": \"2020-06-11T11:34+01:00\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Project - User 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI5NjQ4MDcsInN1YiI6MX0.KUgZQbWW5p1KEPOzP9IN9aGzv4YJYL-3DU_m5cxt08w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Busan Project",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Haeundae Beach",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "external",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Haeundae, Busan",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/home/seslab/Desktop/Dummy Thumbnail/kitten.jpeg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Project Response Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Project A",
+											"description": "String (REQUIRED)",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"description": "Text (OPTIONAL)",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "international",
+											"description": "{ in_house: 0, external: 1, international: 2 } (REQUIRED)",
+											"type": "text"
+										},
+										{
+											"key": "location",
+											"value": "Seoul",
+											"description": "String (REQUIRED)",
+											"type": "text"
+										},
+										{
+											"key": "thumbnail",
+											"description": "Image File (REQUIRED)",
+											"type": "file",
+											"src": "/F:/My Downloads/story.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects"
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"project\",\n        \"attributes\": {\n            \"title\": \"Project A\",\n            \"thumbnail\": \"http://ondronemap.com/story.jpg\",\n            \"description\": \"\",\n            \"location\": \"Seoul\",\n            \"type\": \"international\",\n            \"ownerName\": \"John Doe\",\n            \"createdAt\": \"2020-06-11T11:34+01:00\",\n            \"updatedAt\": \"2020-06-11T11:34+01:00\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Content",
+			"item": [
+				{
+					"name": "Create Content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI4Nzg4MTksInN1YiI6MX0.MiQogmESH6FbvfxwbPQMR0VNwKwtEAPlTAq-KKHTzsc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"\", // Required\r\n    \"body\": \"\" // Required\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects/3/contents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								"3",
+								"contents"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Content Response Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Content A\", // Required\r\n    \"body\": \"This will be the actual long body for the content.\" // Required\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects/:project_id/contents",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects",
+										":project_id",
+										"contents"
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"content\",\n        \"attributes\": {\n            \"projectId\": 1,\n            \"projectOwnerName\": \"John Doe\",\n            \"title\": \"Content A\",\n            \"body\": \"This will be the actual long body for the content.\",   \n            \"createdAt\": \"2020-06-11T11:34+01:00\",\n            \"updatedAt\": \"2020-06-11T11:34+01:00\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Contents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/projects/4/contents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								"4",
+								"contents"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Contents Response Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects/:project_id/contents",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects",
+										":project_id",
+										"contents"
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"type\": \"content\",\r\n            \"attributes\": {\r\n                \"projectId\": 1,\r\n                \"projectOwnerName\": \"John Doe\",\r\n                \"title\": \"Content A\",\r\n                \"body\": \"This will be the actual long body for the content.\",   \r\n                \"createdAt\": \"2020-06-11T11:34+01:00\",\r\n                \"updatedAt\": \"2020-06-11T11:34+01:00\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"type\": \"content\",\r\n            \"attributes\": {\r\n                \"projectId\": 1,\r\n                \"projectOwnerName\": \"Jane Doe\",\r\n                \"title\": \"Content B\",\r\n                \"body\": \"This will be the another actual long awesome body for the content.\",   \r\n                \"createdAt\": \"2020-06-11T11:34+01:00\",\r\n                \"updatedAt\": \"2020-06-11T11:34+01:00\"\r\n            }\r\n        }\r\n    ]\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Specific Content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects/:project_id/contents/:id",
+							"protocol": "{{SCHEME}}",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"projects",
+								":project_id",
+								"contents",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "project_id",
+									"value": "",
+									"type": "string",
+									"description": "Project ID"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "string",
+									"description": "Content ID"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Specific Content Response Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/projects/:project_id/contents/:id",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"projects",
+										":project_id",
+										"contents",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"description": "Project ID"
+										},
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Content ID"
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n  \"data\": {\r\n        \"id\": 1,\r\n        \"type\": \"content\",\r\n        \"attributes\": {\r\n            \"projectId\": 1,\r\n            \"projectOwnerName\": \"John Doe\",\r\n            \"title\": \"Project 1 Content 1\",\r\n            \"body\": \"Village did removed enjoyed explain nor ham saw calling talking.\",\r\n            \"createdAt\": \"2020-06-11T11:34+01:00\",\r\n            \"updatedAt\": \"2020-06-11T11:34+01:00\"\r\n      }\r\n    }\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI5MzIxNDAsInN1YiI6MX0.BZWyFlsa5YsIM_9bD-78Znxuzyv6HMgf8DrsxC7MUDk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Changwon Project\",\r\n    \"body\": \"Changwon\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/contents/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"contents",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Content Response Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Content 1 Updated\",\r\n    \"body\": \"This body was updated using the awesome API.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/contents/:id",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"contents",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Content ID"
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n  \"data\": {\r\n    \"id\": 1,\r\n    \"type\": \"content\",\r\n    \"attributes\": {\r\n        \"project_id\": 1,\r\n        \"projectOwnerName\": \"John Doe\",\r\n        \"title\": \"Content 1 Updated\",\r\n        \"body\": \"This body was updated using the awesome API.\",\r\n        \"createdAt\": \"2020-06-11T11:34+01:00\",\r\n        \"updatedAt\": \"2020-07-11T11:34+01:00\"\r\n    }\r\n  }\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/contents/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"contents",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Content Response Example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SCHEME}}://{{SERVER}}/{{VERSION}}/contents/:id",
+									"protocol": "{{SCHEME}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"{{VERSION}}",
+										"contents",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Deleted\"\r\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
