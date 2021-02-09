@@ -2,7 +2,7 @@ class Api::V1::ContentsController < ApplicationController
   before_action :authenticate_user, except: [:show, :index]
 
   def index
-    #Get all Contents by ID
+    #Get all Contents by ID Project
     if Content.exists?
       #Table isn't empty
       resultData = Array.new
@@ -50,6 +50,7 @@ class Api::V1::ContentsController < ApplicationController
 
 
   def show
+
     render(json: "Yogiyo!!!" , status: :unprocessable_entity)
   end
 

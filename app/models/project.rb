@@ -1,9 +1,8 @@
 class Project < ApplicationRecord
-  #enum type: {in_house: 0, external: 1, international:2 }
 
-  #alias_attribute :projectType, :type
+  mount_uploader :thumbnail, ThumbnailUploader
   enum projectType: [:in_house, :external, :international ]
 
-  validates :title, :location, :projectType, presence:true
+  validates :title, :location, :projectType, :thumbnail, presence:true
 
 end

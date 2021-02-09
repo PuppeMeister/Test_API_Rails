@@ -10,19 +10,19 @@ class Api::V1::ProjectsController < ApplicationController
       final_message = Array.new
       # Iterate over the rows
       Project.all.each do |project|
-        #user = User.find_by_email(project.userEmail)
+        user = User.find_by_email(project.userEmail)
         projectData =
           {
               "id": project.id,
               "type": "project",
               "attributes": {
                 "title": project.title,
-                "thumbnail": project.thumbnail,
+                "thumbnail": project.thumbnail.url,
                 "description": project.description,
                 "location": project.location,
                 "type": project.projectType,
-                #"ownerName": user.firstName+" "+user.lastName,
-                "ownerName": current_user.firstName+" "+current_user.lastName,
+                "ownerName": user.firstName+" "+user.lastName,
+                #"ownerName": current_user.firstName+" "+current_user.lastName,
                 "createdAt": project.created_at,
                 "updatedAt": project.updated_at
               }
@@ -52,14 +52,14 @@ class Api::V1::ProjectsController < ApplicationController
             "type": "project",
             "attributes": {
               "title": @project.title,
-              "thumbnail": @project.thumbnail,
+              "thumbnail": @project.thumbnail.url,
               "description": @project.description,
               "location": @project.location,
               "type": @project.projectType,
               #"ownerName": @user.firstName+" "+@user.lastName,
               "ownerName": current_user.firstName+" "+current_user.lastName,
-              "createdAt": @user.created_at,
-              "updatedAt": @user.updated_at
+              "createdAt": @project.created_at,
+              "updatedAt": @project.updated_at
                 }
         }
 
@@ -81,7 +81,7 @@ class Api::V1::ProjectsController < ApplicationController
             "type": "project",
             "attributes": {
               "title": project.title,
-              "thumbnail": project.thumbnail,
+              "thumbnail": project.thumbnail.url,
               "description": project.description,
               "location": project.location,
               "type": project.projectType,
@@ -113,7 +113,7 @@ class Api::V1::ProjectsController < ApplicationController
             "type": "projects",
             "attributes": {
               "title": myData.title,
-              "thumbnail": myData.thumbnail,
+              "thumbnail": myData.thumbnail.url,
               "description": myData.description,
               "location": myData.location,
               "type": myData.projectType,
@@ -148,7 +148,7 @@ class Api::V1::ProjectsController < ApplicationController
             "type": "project",
             "attributes": {
               "title": updatedData.title,
-              "thumbnail": updatedData.thumbnail,
+              "thumbnail": updatedData.thumbnail.url,
               "description": updatedData.description,
               "location": updatedData.location,
               "type": updatedData.projectType,
@@ -187,7 +187,7 @@ class Api::V1::ProjectsController < ApplicationController
   def projects_params
 
     #params.require(:project).permit(:title, :description, :projectType, :location, :thumbnail)
-    params.require(:project).permit(:title, :description, :projectType, :location, :thumbnail)
+    params.permit(:title, :description, :projectType, :location, :thumbnail)
   end
 
   def modify_params
@@ -197,9 +197,15 @@ class Api::V1::ProjectsController < ApplicationController
 
       typeValue = params['type']
       params.delete :type
-      params['project'].delete :type
+
+      #Check if upload thumbnail or not ('project' entity exists when user does not upload thumbnail )
+      if params['project'].present?
+        params['project'].delete :type
+        params['project'].merge!({:projectType => typeValue})
+      end
+
       params.merge!({:projectType => typeValue})
-      params['project'].merge!({:projectType => typeValue})
+
     end
 
   end
